@@ -1,0 +1,29 @@
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideSocketIo, SocketIoConfig } from 'ngx-socket-io';
+import { routes } from './app.routes';
+import { environment } from '../environment/environment';
+import { MatDialogModule } from '@angular/material/dialog';
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+
+const config: SocketIoConfig = { 
+  url: `${environment.apiUrl}`,
+  options: {
+    path: '/socket.io',
+    reconnection: true,
+    reconnectionAttempts: 5,
+    reconnectionDelay: 1000,
+    timeout: 20000,
+  },
+};
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes),
+    provideSocketIo(config),
+    provideAnimations(),
+    MatDialogModule,
+  ],
+};
