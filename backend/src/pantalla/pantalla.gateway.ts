@@ -6,7 +6,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { Llamable, PantallaService } from './pantalla.service';
 
-@WebSocketGateway({ cors: { origin: true, credentials: true } })
+@WebSocketGateway({ cors: { origin: process.env.FRONTEND_URL ?? true, credentials: true } })
 export class PantallaGateway {
   @WebSocketServer()
   server: Server;

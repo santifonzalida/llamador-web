@@ -8,7 +8,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { PuestoService } from './puesto.service';
 
-@WebSocketGateway({ cors: { origin: true } })
+@WebSocketGateway({ cors: { origin: process.env.FRONTEND_URL ?? true, credentials: true } })
 export class PuestoGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
