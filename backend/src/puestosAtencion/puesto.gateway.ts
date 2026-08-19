@@ -31,8 +31,8 @@ export class PuestoGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('puesto:add')
-  handleAdd() {
-    const puesto = this.puestoService.addPuestoAtencion();
+  handleAdd(client: Socket, payload?: { name?: string }) {
+    const puesto = this.puestoService.addPuestoAtencion(payload?.name);
     // broadcast
     this.server.emit('puesto:update', this.puestoService.getPuestosAtencion());
     return { status: 'ok' };

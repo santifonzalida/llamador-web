@@ -4,6 +4,7 @@ import { PUESTOS_ATENCION } from './puestos.data';
 export interface Puesto {
   id: number;
   name: string;
+  descripcion: string;
   free: boolean;
   idClient: string;
 }
@@ -16,13 +17,16 @@ export class PuestoService {
     return this.puestos.sort((a,b) => a.id - b.id);
   }
 
-  addPuestoAtencion(): Puesto {
+  addPuestoAtencion(name?: string): Puesto {
     const puestosLength = this.puestos.length;
+    const id = puestosLength == 0 ? 1 : this.puestos[this.puestos.length - 1].id + 1;
+    const nombrePuesto = name?.trim() || `Puesto ${id}`;
     const puesto: Puesto = {
-      id: puestosLength == 0 ? 1 : this.puestos[this.puestos.length - 1].id + 1,
+      id,
       free: true,
       idClient: '',
-      name: `Puesto ${puestosLength == 0 ? 1 : this.puestos[this.puestos.length - 1].id + 1}`,
+      name: nombrePuesto,
+      descripcion: nombrePuesto,
     };
     this.puestos.push(puesto);
     return puesto;

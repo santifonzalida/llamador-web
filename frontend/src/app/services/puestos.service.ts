@@ -16,7 +16,7 @@ export class PuestosService {
         this.socket.onPuestoLiberated().subscribe((p: Puesto[]) => this.puestoSubject.next(p));
     }
 
-    addPuesto() { this.socket.addPuesto(); }
+    addPuesto(name: string) { this.socket.addPuesto(name); }
     deletePuesto(id: number) { this.socket.deletePuesto(id); }
     takePuesto(id: number) { this.socket.takePuesto(id); }
     liberatePuesto(id: number) { this.socket.liberatePuesto(id); }

@@ -85,7 +85,7 @@ export class SocketService {
     onReconnectFailed(): Observable<any> { return this.socket.fromEvent('reconnect_failed'); }
 
     // emitters puesto
-    addPuesto(): void { this.socket.emit('puesto:add'); }
+    addPuesto(name: string): void { this.socket.emit('puesto:add', { name }); }
     deletePuesto(id: number): void { this.socket.emit('puesto:delete', { id }); }
     takePuesto(id: number): void { this.socket.emit('puesto:take', { id }); }
     liberatePuesto(id: number): void { this.socket.emit('puesto:liberate', { id }); }

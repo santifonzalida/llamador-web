@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContentComponent } from "../common/confirmacion-dialog/confirmacion-dialog.component";
+import { AgregarPuestoDialogComponent } from "../common/agregar-puesto-dialog/agregar-puesto-dialog.component";
 import { PuestosService } from '../../services/puestos.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -55,7 +56,15 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     }
 
     agregarPuesto() {
-        this.puestosService.addPuesto();
+        const dialogRef = this.dialog.open(AgregarPuestoDialogComponent, {
+            width: '300px',
+        });
+
+        dialogRef.afterClosed().subscribe((nombre: string | undefined) => {
+            if (nombre) {
+                this.puestosService.addPuesto(nombre);
+            }
+        });
     }
 
     irAlPuestoAtencion(puesto: Puesto){
